@@ -45,3 +45,6 @@ Temporary Items
 *.project
 target/
 .settings/
+**/fitnesse/**/*.zip
+**/fitnesse/RecentChanges/
+**/fitnesse/TemplateLibrary/
