@@ -10,6 +10,16 @@
 			<artifactId>spring-batch-core</artifactId>
 			<version>3.0.4.RELEASE</version>
 		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jdbc</artifactId>
+			<version>4.0.5.RELEASE</version>
+		</dependency>
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<version>1.4.187</version>
+		</dependency>
 	</dependencies>
 
 </project>
