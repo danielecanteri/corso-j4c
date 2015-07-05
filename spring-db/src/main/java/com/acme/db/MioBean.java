@@ -21,6 +21,7 @@ public class MioBean {
 
 		doCountConParametri(jdbcTemplate);
 
+		doQueryForObject(jdbcTemplate);
 	}
 
 	private void doCount(JdbcTemplate jdbcTemplate) {
@@ -42,4 +43,10 @@ public class MioBean {
 
 	}
 
+	private void doQueryForObject(JdbcTemplate jdbcTemplate) {
+		String descrizione = jdbcTemplate.queryForObject(
+				"select descrizione from prova where id = ?",
+				new Object[] { 2 }, String.class);
+		System.out.println("descrizione: " + descrizione);
+	}
 }
