@@ -37,6 +37,8 @@ public class MioBean {
 		insertRiga(jdbcTemplate);
 
 		updateRighe(jdbcTemplate);
+
+		deleteRighe(jdbcTemplate);
 	}
 
 	private void doCount(JdbcTemplate jdbcTemplate) {
@@ -121,6 +123,14 @@ public class MioBean {
 				"update PROVA set descrizione = ? where id in (?,?)",
 				new Object[] { "DESCRIZIONE", 1, 3 });
 		System.out.println("== updateRighe");
+		System.out.println("rows: " + rows);
+
+	}
+
+	private void deleteRighe(JdbcTemplate jdbcTemplate) {
+		int rows = jdbcTemplate.update("delete from PROVA where id in (?,?)",
+				new Object[] { 1, 5 });
+		System.out.println("== deleteRighe");
 		System.out.println("rows: " + rows);
 
 	}
