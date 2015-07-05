@@ -19,12 +19,27 @@ public class MioBean {
 
 		doCount(jdbcTemplate);
 
+		doCountConParametri(jdbcTemplate);
+
 	}
 
 	private void doCount(JdbcTemplate jdbcTemplate) {
 		Integer count = jdbcTemplate.queryForObject(
 				"select count(*) from prova", Integer.class);
 		System.out.println("count: " + count);
+	}
+
+	private void doCountConParametri(JdbcTemplate jdbcTemplate) {
+		Integer count = jdbcTemplate.queryForObject(
+				"select count(*) from prova where id = ?", new Object[] { 1 },
+				Integer.class);
+		System.out.println("count con parametro 1: " + count);
+
+		count = jdbcTemplate.queryForObject(
+				"select count(*) from prova where id = ?", new Object[] { 5 },
+				Integer.class);
+		System.out.println("count con parametro 5: " + count);
+
 	}
 
 }
