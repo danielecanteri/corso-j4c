@@ -1,5 +1,7 @@
 package com.acme.db;
 
+import java.util.List;
+
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +29,8 @@ public class MioBean {
 		doQueryDiUnaRigaConRowMapper(jdbcTemplate);
 
 		doQueryDiUnaRigaConBeanPropertyRowMapper(jdbcTemplate);
+
+		doQueryDiPiuRigheConBeanPropertyRowMapper(jdbcTemplate);
 	}
 
 	private void doCount(JdbcTemplate jdbcTemplate) {
@@ -72,6 +76,18 @@ public class MioBean {
 		System.out.println("== doQueryDiUnaRigaConBeanPropertyRowMapper");
 		System.out.println("id: " + provaDto.getId());
 		System.out.println("descrizione: " + provaDto.getDescrizione());
+
+	}
+
+	private void doQueryDiPiuRigheConBeanPropertyRowMapper(
+			JdbcTemplate jdbcTemplate) {
+		List<ProvaDto> list = jdbcTemplate.query("select * from prova",
+				new BeanPropertyRowMapper<ProvaDto>(ProvaDto.class));
+		System.out.println("== doQueryDiPiuRigheConBeanPropertyRowMapper");
+		for (ProvaDto provaDto : list) {
+			System.out.println("id: " + provaDto.getId());
+			System.out.println("descrizione: " + provaDto.getDescrizione());
+		}
 
 	}
 }
