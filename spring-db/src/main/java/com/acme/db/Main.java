@@ -10,6 +10,7 @@ public class Main {
 		ApplicationContext applicationContext = new ClassPathXmlApplicationContext(
 				"beans.xml");
 		System.out.println(applicationContext);
+		applicationContext.getBean(MioBean.class).run();
 		System.out.println("END");
 	}
 }
