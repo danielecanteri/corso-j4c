@@ -31,6 +31,8 @@ public class MioBean {
 		doQueryDiUnaRigaConBeanPropertyRowMapper(jdbcTemplate);
 
 		doQueryDiPiuRigheConBeanPropertyRowMapper(jdbcTemplate);
+
+		doQueryDiPiuRigheConBeanPropertyRowMapper2(jdbcTemplate);
 	}
 
 	private void doCount(JdbcTemplate jdbcTemplate) {
@@ -83,6 +85,18 @@ public class MioBean {
 			JdbcTemplate jdbcTemplate) {
 		List<ProvaDto> list = jdbcTemplate.query("select * from prova",
 				new BeanPropertyRowMapper<ProvaDto>(ProvaDto.class));
+		System.out.println("== doQueryDiPiuRigheConBeanPropertyRowMapper");
+		for (ProvaDto provaDto : list) {
+			System.out.println("id: " + provaDto.getId());
+			System.out.println("descrizione: " + provaDto.getDescrizione());
+		}
+
+	}
+
+	private void doQueryDiPiuRigheConBeanPropertyRowMapper2(
+			JdbcTemplate jdbcTemplate) {
+		List<ProvaDto> list = jdbcTemplate.query("select * from prova",
+				new ProvaDtoResultSetExtractor());
 		System.out.println("== doQueryDiPiuRigheConBeanPropertyRowMapper");
 		for (ProvaDto provaDto : list) {
 			System.out.println("id: " + provaDto.getId());
