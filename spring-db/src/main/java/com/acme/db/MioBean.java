@@ -35,6 +35,8 @@ public class MioBean {
 		doQueryDiPiuRigheConBeanPropertyRowMapper2(jdbcTemplate);
 
 		insertRiga(jdbcTemplate);
+
+		updateRighe(jdbcTemplate);
 	}
 
 	private void doCount(JdbcTemplate jdbcTemplate) {
@@ -112,5 +114,14 @@ public class MioBean {
 				new Object[] { 3, "descrizione 3" });
 		System.out.println("== insertRiga");
 		System.out.println("rows: " + rows);
+	}
+
+	private void updateRighe(JdbcTemplate jdbcTemplate) {
+		int rows = jdbcTemplate.update(
+				"update PROVA set descrizione = ? where id in (?,?)",
+				new Object[] { "DESCRIZIONE", 1, 3 });
+		System.out.println("== updateRighe");
+		System.out.println("rows: " + rows);
+
 	}
 }
