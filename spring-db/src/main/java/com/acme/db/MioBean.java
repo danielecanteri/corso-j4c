@@ -3,6 +3,7 @@ package com.acme.db;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
@@ -24,6 +25,8 @@ public class MioBean {
 		doQueryForObject(jdbcTemplate);
 
 		doQueryDiUnaRigaConRowMapper(jdbcTemplate);
+
+		doQueryDiUnaRigaConBeanPropertyRowMapper(jdbcTemplate);
 	}
 
 	private void doCount(JdbcTemplate jdbcTemplate) {
@@ -56,6 +59,17 @@ public class MioBean {
 		ProvaDto provaDto = (ProvaDto) jdbcTemplate.queryForObject(
 				"select * from prova where id = 1", new ProvaDtoRowMapper());
 		System.out.println("== doQueryDiUnaRigaConRowMapper");
+		System.out.println("id: " + provaDto.getId());
+		System.out.println("descrizione: " + provaDto.getDescrizione());
+
+	}
+
+	private void doQueryDiUnaRigaConBeanPropertyRowMapper(
+			JdbcTemplate jdbcTemplate) {
+		ProvaDto provaDto = jdbcTemplate.queryForObject(
+				"select * from prova where id = 2",
+				new BeanPropertyRowMapper<ProvaDto>(ProvaDto.class));
+		System.out.println("== doQueryDiUnaRigaConBeanPropertyRowMapper");
 		System.out.println("id: " + provaDto.getId());
 		System.out.println("descrizione: " + provaDto.getDescrizione());
 
