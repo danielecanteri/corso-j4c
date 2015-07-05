@@ -22,6 +22,8 @@ public class MioBean {
 		doCountConParametri(jdbcTemplate);
 
 		doQueryForObject(jdbcTemplate);
+
+		doQueryDiUnaRigaConRowMapper(jdbcTemplate);
 	}
 
 	private void doCount(JdbcTemplate jdbcTemplate) {
@@ -48,5 +50,14 @@ public class MioBean {
 				"select descrizione from prova where id = ?",
 				new Object[] { 2 }, String.class);
 		System.out.println("descrizione: " + descrizione);
+	}
+
+	private void doQueryDiUnaRigaConRowMapper(JdbcTemplate jdbcTemplate) {
+		ProvaDto provaDto = (ProvaDto) jdbcTemplate.queryForObject(
+				"select * from prova where id = 1", new ProvaDtoRowMapper());
+		System.out.println("== doQueryDiUnaRigaConRowMapper");
+		System.out.println("id: " + provaDto.getId());
+		System.out.println("descrizione: " + provaDto.getDescrizione());
+
 	}
 }
