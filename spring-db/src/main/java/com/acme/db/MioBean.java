@@ -33,6 +33,8 @@ public class MioBean {
 		doQueryDiPiuRigheConBeanPropertyRowMapper(jdbcTemplate);
 
 		doQueryDiPiuRigheConBeanPropertyRowMapper2(jdbcTemplate);
+
+		insertRiga(jdbcTemplate);
 	}
 
 	private void doCount(JdbcTemplate jdbcTemplate) {
@@ -103,5 +105,12 @@ public class MioBean {
 			System.out.println("descrizione: " + provaDto.getDescrizione());
 		}
 
+	}
+
+	private void insertRiga(JdbcTemplate jdbcTemplate) {
+		int rows = jdbcTemplate.update("insert into PROVA values (?,?)",
+				new Object[] { 3, "descrizione 3" });
+		System.out.println("== insertRiga");
+		System.out.println("rows: " + rows);
 	}
 }
