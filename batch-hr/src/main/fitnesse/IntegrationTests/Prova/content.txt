@@ -2,6 +2,10 @@
 |start application context|batch.xml|
 
 
+|script|spring fixture|
+|run batch|job|
+|check|exit code|COMPLETED|
+
 |prova fitnesse|
 |valore |test? |
 |a      |b     |
