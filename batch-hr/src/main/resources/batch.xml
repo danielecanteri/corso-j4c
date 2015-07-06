@@ -1,10 +1,12 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:batch="http://www.springframework.org/schema/batch" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc"
 	xsi:schemaLocation="
            http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
            http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
-           http://www.springframework.org/schema/batch http://www.springframework.org/schema/batch/spring-batch.xsd">
+           http://www.springframework.org/schema/batch http://www.springframework.org/schema/batch/spring-batch.xsd
+           http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc.xsd">
 
 	<context:annotation-config />
 
@@ -17,14 +19,7 @@
 		</batch:step>
 	</batch:job>
 
-	<bean id="itemReader" class="org.springframework.batch.item.support.ListItemReader">
-		<constructor-arg>
-			<list>
-				<value>abc</value>
-				<value>def</value>
-				<value>ghi</value>
-			</list>
-		</constructor-arg>
+	<bean id="itemReader" class="com.acme.hr.ProvaItemReader">
 	</bean>
 
 	<bean id="itemProcessor"
@@ -43,5 +38,10 @@
 
 	<bean id="transactionManager"
 		class="org.springframework.batch.support.transaction.ResourcelessTransactionManager" />
+
+	<jdbc:embedded-database id="dataSource" type="H2">
+		<jdbc:script location="classpath:sql/db-schema.sql" />
+		<jdbc:script location="classpath:sql/db-test-data.sql" />
+	</jdbc:embedded-database>
 
 </beans>
