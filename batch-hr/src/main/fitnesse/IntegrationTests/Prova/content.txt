@@ -6,6 +6,11 @@
 |run batch|job|
 |check|exit code|COMPLETED|
 
+|Query: risultati batch prova|
+|risultato|
+|abc|
+|de|
+
 |prova fitnesse|
 |valore |test? |
 |a      |b     |
