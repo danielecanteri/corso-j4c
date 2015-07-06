@@ -1,3 +1,11 @@
+|script|spring fixture|
+|start application context|batch.xml|
+
+
 |prova fitnesse|
 |valore |test? |
 |a      |b     |
+
+
+|script|spring fixture|
+|close context|
