@@ -9,7 +9,8 @@
 |Query: risultati batch prova|
 |risultato|
 |abc|
-|de|
+|def|
+|ghi|
 
 |prova fitnesse|
 |valore |test? |
