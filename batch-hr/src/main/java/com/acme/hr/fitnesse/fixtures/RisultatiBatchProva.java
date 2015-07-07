@@ -7,20 +7,21 @@ import javax.sql.DataSource;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 
-import com.acme.hr.dto.Prova;
+import com.acme.hr.dto.ProvaOut;
 
 public class RisultatiBatchProva {
 
 	public List<Object> query() {
 		DataSource dataSource = SpringFixture.context.getBean(DataSource.class);
 
-		List<Prova> result = new JdbcTemplate(dataSource).query(
+		List<ProvaOut> result = new JdbcTemplate(dataSource).query(
 				"select * from PROVA_OUT", new BeanPropertyRowMapper(
-						Prova.class));
+						ProvaOut.class));
 
 		ListBuilder builder = new ListBuilder();
-		for (Prova item : result) {
-			builder.addRow().withColumn("descrizione", item.getDescrizione());
+		for (ProvaOut item : result) {
+			builder.addRow().withColumn("descr", item.getDescr())
+					.withColumn("length", item.getLength());
 		}
 		return builder.toList();
 	}

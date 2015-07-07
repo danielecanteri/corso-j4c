@@ -4,7 +4,7 @@
 La tabella di out inizialmente e' vuota
 
 |Query: risultati batch prova|
-|descrizione|
+|descr|
 
 Eseguo il batch
 
@@ -15,10 +15,9 @@ Eseguo il batch
 La tabella di out contiene i risultati attesi
 
 |Query: risultati batch prova|
-|descrizione|
-|abc|
-|def|
-|ghi|
+|descr|length|
+|ABC|3|
+|GHI|3|
 
 |prova fitnesse|
 |valore |test? |

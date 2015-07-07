@@ -3,5 +3,6 @@ create table PROVA(
 );
 
 create table PROVA_OUT(
-	descrizione varchar2(10)
+	descr varchar2(10),
+	length number
 );
