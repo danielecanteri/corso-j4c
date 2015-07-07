@@ -37,7 +37,7 @@
 	<bean id="itemProcessor"
 		class="org.springframework.batch.item.support.PassThroughItemProcessor" />
 
-	<bean id="itemWriter" class="com.acme.hr.SysoItemWriter">
+	<bean id="itemWriter" class="com.acme.hr.DbItemWriter">
 	</bean>
 
 	<bean id="jobLauncher"

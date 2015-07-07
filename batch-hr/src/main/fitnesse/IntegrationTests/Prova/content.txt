@@ -1,13 +1,21 @@
 |script|spring fixture|
 |start application context|batch.xml|
 
+La tabella di out inizialmente e' vuota
+
+|Query: risultati batch prova|
+|descrizione|
+
+Eseguo il batch
 
 |script|spring fixture|
 |run batch|job|
 |check|exit code|COMPLETED|
 
+La tabella di out contiene i risultati attesi
+
 |Query: risultati batch prova|
-|risultato|
+|descrizione|
 |abc|
 |def|
 |ghi|
