@@ -19,7 +19,19 @@
 		</batch:step>
 	</batch:job>
 
-	<bean id="itemReader" class="com.acme.hr.ProvaItemReader">
+	<bean id="itemReader"
+		class="org.springframework.batch.item.database.JdbcCursorItemReader">
+		<property name="dataSource" ref="dataSource" />
+		<property name="sql">
+			<value>
+				SELECT * FROM PROVA
+			</value>
+		</property>
+		<property name="rowMapper">
+			<bean class="org.springframework.jdbc.core.BeanPropertyRowMapper">
+				<constructor-arg name="mappedClass" value="com.acme.hr.dto.Prova" />
+			</bean>
+		</property>
 	</bean>
 
 	<bean id="itemProcessor"
