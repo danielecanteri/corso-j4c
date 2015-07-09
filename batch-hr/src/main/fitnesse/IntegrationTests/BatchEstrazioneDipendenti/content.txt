@@ -1,0 +1,52 @@
+!3 Esecuzione ad agosto 2015
+
+| script | spring fixture |
+| start application context | batch-hr.xml |
+
+L'elenco di dipendenti e':
+
+| Query: elenco dipendenti |
+| id | nome | cognome | data_inizio | data_fine |
+| 1 | | | | |
+| 2 | | | | |
+| 3 | | | | |
+
+Eseguo il batch
+
+| script | spring fixture |
+| usa parametro | anno | con valore | 2015 |
+| usa parametro | mese | con valore | 8 |
+| run batch | estrazione-dipendenti |
+| check | exit code | COMPLETED |
+
+La tabella di out contiene i risultati attesi
+
+| Query: estrazione dipendenti |
+| anno | mese | id | nominativo |
+| 2015 | 8 | 2 | Luigi Bianchi |
+| 2015 | 8 | 3 | Alice Avesani |
+
+| script | spring fixture |
+| close context |
+
+!3 Esecuzione a ottobre 2010
+
+| script | spring fixture |
+| start application context | batch-hr.xml |
+
+Eseguo il batch
+
+| script | spring fixture |
+| usa parametro | anno | con valore | 2010 |
+| usa parametro | mese | con valore | 10 |
+| run batch | estrazione-dipendenti |
+| check | exit code | COMPLETED |
+
+La tabella di out contiene i risultati attesi
+
+| Query: estrazione dipendenti |
+| anno | mese | id | nominativo |
+| 2010 | 10 | 1 | Mario Rossi |
+
+| script | spring fixture |
+| close context |

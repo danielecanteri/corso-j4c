@@ -1,7 +1,9 @@
 package com.acme.hr.fitnesse.fixtures;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 public class RowBuilder {
@@ -18,4 +20,9 @@ public class RowBuilder {
 		return this;
 	}
 
+	public RowBuilder withColumn(String string, Date data) {
+		row.add(Arrays.asList(string, data != null ? new SimpleDateFormat(
+				"dd/MM/yyyy").format(data) : null));
+		return this;
+	}
 }

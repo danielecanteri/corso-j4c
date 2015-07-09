@@ -14,9 +14,14 @@ public class SpringFixture {
 
 	static ClassPathXmlApplicationContext context;
 	private JobExecution run;
+	private JobParametersBuilder jobParametersBuilder = new JobParametersBuilder();;
 
 	public void startApplicationContext(String location) {
 		context = new ClassPathXmlApplicationContext(location);
+	}
+
+	public void usaParametroConValore(String parametro, String valore) {
+		jobParametersBuilder.addString(parametro, valore);
 	}
 
 	public void runBatch(String jobName)
@@ -24,7 +29,7 @@ public class SpringFixture {
 			JobInstanceAlreadyCompleteException, JobParametersInvalidException {
 		JobLauncher launcher = context.getBean(JobLauncher.class);
 		Job job = (Job) context.getBean(jobName);
-		run = launcher.run(job, new JobParametersBuilder().toJobParameters());
+		run = launcher.run(job, jobParametersBuilder.toJobParameters());
 	}
 
 	public String exitCode() {
