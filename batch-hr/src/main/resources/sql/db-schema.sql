@@ -3,8 +3,16 @@ create table DIPENDENTI (
 	nome			varchar2(25),
 	cognome			varchar2(25),
 	data_inizio		date,
-	data_fine		date
+	data_fine		date,
+	tipo_contratto	number
 );
+
+
+create table TIPO_CONTRATTO (
+	id				number,
+	descrizione		varchar2(25)
+);
+
 
 create table ESTRAZIONE_DIPENDENTI (
 	anno			number,

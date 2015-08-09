@@ -1,0 +1,44 @@
+Il batch accede alla tabella dei dipendenti ed estrae una lista di dipendenti con tipologia di contratto.
+
+Viene prodotto un file di output.
+
+Il batch utilizza:
+ * un composite processor in modo da avere singoli componenti che 
+ * in particolare un processor che aggiunge l'informazione della descrizione della tipologia di contratto (una soluzione alternativa potrebbe essere utilizzare una join nella estrazione master dei dati)
+ * il processor utilizza una "cache" 
+
+!3 Esecuzione
+|script                   |spring fixture                       |
+|start application context|batch-hr-dipendenti-con-contratto.xml|
+
+L'elenco di dipendenti e':
+
+|Query: elenco dipendenti      |
+|id|nome|cognome|tipo_contratto|
+|1 |    |       |              |
+|2 |    |       |              |
+|3 |    |       |              |
+
+|Query: tipi contratto|
+|id    |descrizione   |
+|1     |              |
+|2     |              |
+|3     |              |
+
+Eseguo il batch
+
+|script       |spring fixture           |
+|run batch    |estrazione-dipendenti    |
+|check        |exit code|COMPLETED      |
+
+Il file di output contiene i risultati attesi
+
+|script  |controlla file                             |
+|con nome|estrazione-dipendenti-con-tipo-contratto.csv                  |
+|ensure  |il file esiste                             |
+|check   |la riga|0|e uguale a|AVESANI,ALICE,Apprendistato|
+|check   |la riga|1|e uguale a|BIANCHI,LUIGI,Partita iva|
+|check   |la riga|2|e uguale a|ROSSI,MARIO,Tempo indeterminato|
+
+|script|spring fixture|
+|close context        |
