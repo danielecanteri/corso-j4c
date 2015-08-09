@@ -24,7 +24,8 @@ public class ElencoDipendenti {
 					.withColumn("nome", item.getNome())
 					.withColumn("cognome", item.getCognome())
 					.withColumn("data_inizio", item.getDataInizio())
-					.withColumn("data_fine", item.getDataFine());
+					.withColumn("data_fine", item.getDataFine())
+					.withColumn("tipo_contratto", item.getTipoContratto());
 		}
 		return builder.toList();
 	}

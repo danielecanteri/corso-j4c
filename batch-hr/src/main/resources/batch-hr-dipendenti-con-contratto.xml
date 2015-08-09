@@ -1,0 +1,101 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:batch="http://www.springframework.org/schema/batch" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xsi:schemaLocation="
+           http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+           http://www.springframework.org/schema/batch http://www.springframework.org/schema/batch/spring-batch.xsd
+           http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc.xsd">
+
+	<context:annotation-config />
+
+	<batch:job id="estrazione-dipendenti">
+		<batch:step id="main">
+			<batch:tasklet>
+				<batch:chunk reader="itemReader" processor="itemProcessor"
+					writer="itemWriter" commit-interval="100" />
+			</batch:tasklet>
+		</batch:step>
+	</batch:job>
+
+	<bean id="itemReader"
+		class="org.springframework.batch.item.database.JdbcCursorItemReader">
+		<property name="dataSource" ref="dataSource" />
+		<property name="sql">
+			<value>
+				SELECT * FROM DIPENDENTI
+			</value>
+		</property>
+		<property name="rowMapper">
+			<bean class="org.springframework.jdbc.core.BeanPropertyRowMapper">
+				<constructor-arg name="mappedClass" value="com.acme.hr.dto.Dipendente" />
+			</bean>
+		</property>
+	</bean>
+
+	<bean id="itemProcessor"
+		class="com.acme.hr.prova.batch.estrazionedipendenti.EstrazioneDipendentiProcessor"
+		scope="step">
+		<property name="anno">
+			<value>#{jobParameters['anno']}</value>
+		</property>
+		<property name="mese">
+			<value>#{jobParameters['mese']}</value>
+		</property>
+	</bean>
+
+	<bean id="itemWriter"
+		class="org.springframework.batch.item.support.CompositeItemWriter">
+		<property name="delegates">
+			<list>
+				<bean class="org.springframework.batch.item.database.JdbcBatchItemWriter">
+					<property name="dataSource" ref="dataSource" />
+					<property name="sql">
+						<value>
+							INSERT INTO ESTRAZIONE_DIPENDENTI (anno, mese, id,
+							nominativo)
+							VALUES (:anno, :mese, :id, :nominativo)
+						</value>
+					</property>
+					<property name="itemSqlParameterSourceProvider">
+						<bean
+							class="org.springframework.batch.item.database.BeanPropertyItemSqlParameterSourceProvider" />
+					</property>
+				</bean>
+				<bean class="org.springframework.batch.item.file.FlatFileItemWriter">
+					<property name="resource" value="file:estrazione-dipendenti.csv" />
+					<property name="lineAggregator">
+						<bean
+							class="org.springframework.batch.item.file.transform.DelimitedLineAggregator">
+							<property name="delimiter" value="," />
+							<property name="fieldExtractor">
+								<bean
+									class="org.springframework.batch.item.file.transform.BeanWrapperFieldExtractor">
+									<property name="names" value="anno,mese,id,nominativo" />
+								</bean>
+							</property>
+						</bean>
+					</property>
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="jobLauncher"
+		class="org.springframework.batch.core.launch.support.SimpleJobLauncher">
+		<property name="jobRepository" ref="jobRepository" />
+	</bean>
+
+	<bean id="jobRepository"
+		class="org.springframework.batch.core.repository.support.MapJobRepositoryFactoryBean" />
+
+	<bean id="transactionManager"
+		class="org.springframework.batch.support.transaction.ResourcelessTransactionManager" />
+
+	<jdbc:embedded-database id="dataSource" type="H2">
+		<jdbc:script location="classpath:sql/db-schema.sql" />
+		<jdbc:script location="classpath:sql/db-test-data.sql" />
+	</jdbc:embedded-database>
+
+</beans>

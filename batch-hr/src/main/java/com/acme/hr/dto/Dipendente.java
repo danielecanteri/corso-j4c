@@ -9,6 +9,7 @@ public class Dipendente {
 	private String cognome;
 	private Date dataInizio;
 	private Date dataFine;
+	private int tipoContratto;
 
 	public int getId() {
 		return id;
@@ -50,4 +51,11 @@ public class Dipendente {
 		this.dataFine = dataFine;
 	}
 
+	public int getTipoContratto() {
+		return tipoContratto;
+	}
+
+	public void setTipoContratto(int tipoContratto) {
+		this.tipoContratto = tipoContratto;
+	}
 }
