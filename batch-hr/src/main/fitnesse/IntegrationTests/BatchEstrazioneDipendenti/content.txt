@@ -1,3 +1,12 @@
+Il batch accede alla tabella dei dipendenti ed estrae i dipendenti attivi in un particolare mese anno.
+
+Vengono prodotti i risultati contemporaneamente in una tabella e in un file di output.
+
+Il batch utilizza:
+ * job parameters
+ * un processor per scartare i risultati che non interessano
+ * un composite writer per scrivere i risultati contemporaneamente in due posti
+
 !3 Esecuzione ad agosto 2015
 
 |script                   |spring fixture|
