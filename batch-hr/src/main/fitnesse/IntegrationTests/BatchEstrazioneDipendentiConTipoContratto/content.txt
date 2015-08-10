@@ -3,9 +3,9 @@ Il batch accede alla tabella dei dipendenti ed estrae una lista di dipendenti co
 Viene prodotto un file di output.
 
 Il batch utilizza:
- * un composite processor in modo da avere singoli componenti che 
- * in particolare un processor che aggiunge l'informazione della descrizione della tipologia di contratto (una soluzione alternativa potrebbe essere utilizzare una join nella estrazione master dei dati)
- * il processor utilizza una "cache" 
+ * un processor che produce il record di out che si appoggia a due bean esterni che sono iniettati con modalità diverse
+ * un servizio implementa una interfaccia di trasformazione delle stringhe
+ * il servizio che recupera le descrizioni dei contratti utilizza una "cache"
 
 !3 Esecuzione
 |script                   |spring fixture                       |
@@ -28,7 +28,7 @@ L'elenco di dipendenti e':
 Eseguo il batch
 
 |script       |spring fixture           |
-|run batch    |estrazione-dipendenti    |
+|run batch    |estrazione-dipendenti-con-contratto    |
 |check        |exit code|COMPLETED      |
 
 Il file di output contiene i risultati attesi

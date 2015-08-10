@@ -10,7 +10,7 @@
 
 	<context:annotation-config />
 
-	<batch:job id="estrazione-dipendenti">
+	<batch:job id="estrazione-dipendenti-con-contratto">
 		<batch:step id="main">
 			<batch:tasklet>
 				<batch:chunk reader="itemReader" processor="itemProcessor"
@@ -35,36 +35,15 @@
 	</bean>
 
 	<bean id="itemProcessor"
-		class="com.acme.hr.prova.batch.estrazionedipendenti.EstrazioneDipendentiProcessor"
-		scope="step">
-		<property name="anno">
-			<value>#{jobParameters['anno']}</value>
-		</property>
-		<property name="mese">
-			<value>#{jobParameters['mese']}</value>
-		</property>
-	</bean>
+		class="com.acme.hr.prova.batch.estrazionedipendenticoncontratto.EstrazioneDipendentiConContrattoProcessor" />
 
 	<bean id="itemWriter"
 		class="org.springframework.batch.item.support.CompositeItemWriter">
 		<property name="delegates">
 			<list>
-				<bean class="org.springframework.batch.item.database.JdbcBatchItemWriter">
-					<property name="dataSource" ref="dataSource" />
-					<property name="sql">
-						<value>
-							INSERT INTO ESTRAZIONE_DIPENDENTI (anno, mese, id,
-							nominativo)
-							VALUES (:anno, :mese, :id, :nominativo)
-						</value>
-					</property>
-					<property name="itemSqlParameterSourceProvider">
-						<bean
-							class="org.springframework.batch.item.database.BeanPropertyItemSqlParameterSourceProvider" />
-					</property>
-				</bean>
 				<bean class="org.springframework.batch.item.file.FlatFileItemWriter">
-					<property name="resource" value="file:estrazione-dipendenti.csv" />
+					<property name="resource"
+						value="file:estrazione-dipendenti-con-tipo-contratto.csv" />
 					<property name="lineAggregator">
 						<bean
 							class="org.springframework.batch.item.file.transform.DelimitedLineAggregator">
@@ -72,7 +51,7 @@
 							<property name="fieldExtractor">
 								<bean
 									class="org.springframework.batch.item.file.transform.BeanWrapperFieldExtractor">
-									<property name="names" value="anno,mese,id,nominativo" />
+									<property name="names" value="cognome,nome,descrizioneTipoContratto" />
 								</bean>
 							</property>
 						</bean>
