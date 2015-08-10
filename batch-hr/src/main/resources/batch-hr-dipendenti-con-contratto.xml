@@ -24,7 +24,7 @@
 		<property name="dataSource" ref="dataSource" />
 		<property name="sql">
 			<value>
-				SELECT * FROM DIPENDENTI
+				SELECT * FROM DIPENDENTI ORDER BY COGNOME
 			</value>
 		</property>
 		<property name="rowMapper">
