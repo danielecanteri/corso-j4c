@@ -43,6 +43,9 @@
 			<list>
 				<bean class="com.acme.hr.calcoloral.CreaRecordDiLavoro" />
 				<bean class="com.acme.hr.calcoloral.CopiaCognomeNome" />
+				<bean class="com.acme.hr.calcoloral.CalcolaRal" />
+				<bean class="com.acme.hr.calcoloral.CalcolaTasse" />
+				<bean class="com.acme.hr.calcoloral.CalcolaTicket" />
 				<bean class="com.acme.hr.calcoloral.EstraiRecordPerScrittura" />
 			</list>
 		</property>
@@ -61,7 +64,7 @@
 							<property name="fieldExtractor">
 								<bean
 									class="org.springframework.batch.item.file.transform.BeanWrapperFieldExtractor">
-									<property name="names" value="cognome,nome" />
+									<property name="names" value="cognome,nome,ral,tasse,ticket" />
 								</bean>
 							</property>
 						</bean>

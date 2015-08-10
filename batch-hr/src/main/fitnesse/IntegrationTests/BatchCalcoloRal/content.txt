@@ -25,12 +25,12 @@ Eseguo il batch
 
 Il file di output contiene i risultati attesi
 
-|script  |controlla file                    |
-|con nome|calcolo-ral.csv                   |
-|ensure  |il file esiste                    |
-|check   |la riga|0|e uguale a|Avesani,Alice|
-|check   |la riga|1|e uguale a|Bianchi,Luigi|
-|check   |la riga|2|e uguale a|Rossi,Mario  |
+|script  |controlla file                                  |
+|con nome|calcolo-ral.csv                                 |
+|ensure  |il file esiste                                  |
+|check   |la riga|0|e uguale a|Avesani,Alice,15000,1500,60|
+|check   |la riga|1|e uguale a|Bianchi,Luigi,15000,3000,60|
+|check   |la riga|2|e uguale a|Rossi,Mario,30000,3000,0   |
 
 |script|spring fixture|
 |close context        |
