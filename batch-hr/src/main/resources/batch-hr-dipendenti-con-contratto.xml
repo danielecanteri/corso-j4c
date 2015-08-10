@@ -34,6 +34,8 @@
 		</property>
 	</bean>
 
+	<bean class="com.acme.hr.prova.batch.estrazionedipendenticoncontratto.TrasformazioneStringhe" />
+	
 	<bean id="itemProcessor"
 		class="com.acme.hr.prova.batch.estrazionedipendenticoncontratto.EstrazioneDipendentiConContrattoProcessor" />
 
