@@ -1,0 +1,36 @@
+Il batch accede alla tabella dei dipendenti e calcola la ral sulla base del tipo di contratto.
+
+Viene prodotto un file di output.
+
+Il batch utilizza:
+ * un composite processor per calcolare singolarmente ogni dato
+
+!3 Esecuzione
+|script                   |spring fixture          |
+|start application context|batch-hr-calcolo-ral.xml|
+
+L'elenco di dipendenti e':
+
+|Query: elenco dipendenti      |
+|id|nome|cognome|tipo_contratto|
+|1 |    |       |              |
+|2 |    |       |              |
+|3 |    |       |              |
+
+Eseguo il batch
+
+|script   |spring fixture     |
+|run batch|calcolo-ral        |
+|check    |exit code|COMPLETED|
+
+Il file di output contiene i risultati attesi
+
+|script  |controlla file                    |
+|con nome|calcolo-ral.csv                   |
+|ensure  |il file esiste                    |
+|check   |la riga|0|e uguale a|Avesani,Alice|
+|check   |la riga|1|e uguale a|Bianchi,Luigi|
+|check   |la riga|2|e uguale a|Rossi,Mario  |
+
+|script|spring fixture|
+|close context        |
