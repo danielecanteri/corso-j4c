@@ -34,10 +34,17 @@
 		</property>
 	</bean>
 
-	<bean class="com.acme.hr.prova.batch.estrazionedipendenticoncontratto.TrasformazioneStringhe" />
-	
+	<bean
+		class="com.acme.hr.prova.batch.estrazionedipendenticoncontratto.TrasformazioneStringhe" />
+
 	<bean id="itemProcessor"
-		class="com.acme.hr.prova.batch.estrazionedipendenticoncontratto.EstrazioneDipendentiConContrattoProcessor" />
+		class="com.acme.hr.prova.batch.estrazionedipendenticoncontratto.EstrazioneDipendentiConContrattoProcessor">
+		<property name="recuperaDescrizioniTipoContratto">
+			<bean
+				class="com.acme.hr.prova.batch.estrazionedipendenticoncontratto.RecuperaDescrizioniTipoContratto">
+			</bean>
+		</property>
+	</bean>
 
 	<bean id="itemWriter"
 		class="org.springframework.batch.item.support.CompositeItemWriter">

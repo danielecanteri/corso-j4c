@@ -11,12 +11,19 @@ public class EstrazioneDipendentiConContrattoProcessor implements
 	@Autowired
 	private Trasformatore trasformatore;
 
+	private RecuperaDescrizioniTipoContratto recuperaDescrizioniTipoContratto;
+
 	public RecordDaScrivere process(Dipendente item) throws Exception {
 		RecordDaScrivere out = new RecordDaScrivere();
 		out.setCognome(trasformatore.transform(item.getCognome()));
 		out.setNome(trasformatore.transform(item.getNome()));
-		out.setDescrizioneTipoContratto("" + item.getTipoContratto());
+		out.setDescrizioneTipoContratto(recuperaDescrizioniTipoContratto
+				.descrizione(item.getTipoContratto()));
 		return out;
 	}
 
+	public void setRecuperaDescrizioniTipoContratto(
+			RecuperaDescrizioniTipoContratto recuperaDescrizioniTipoContratto) {
+		this.recuperaDescrizioniTipoContratto = recuperaDescrizioniTipoContratto;
+	}
 }
