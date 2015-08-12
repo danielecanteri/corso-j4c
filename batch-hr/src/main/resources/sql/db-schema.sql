@@ -7,6 +7,11 @@ create table DIPENDENTI (
 	tipo_contratto	number
 );
 
+create table PERMESSI (
+	id_dipendente	number,
+	data_permesso	date,
+	ore				number
+);
 
 create table TIPO_CONTRATTO (
 	id				number,

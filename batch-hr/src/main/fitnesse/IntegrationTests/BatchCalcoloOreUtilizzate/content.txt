@@ -1,0 +1,40 @@
+Il batch accede alla tabella dei permessi e calcola per ogni dipendente la la quantità di ferie godute nel mese.
+
+Viene prodotto un file di output.
+
+Il batch utilizza:
+ * un meccanismo di rottura implementato nel reader per elaborare a blocchi tutti i record di un singolo dipendente
+
+!3 Esecuzione
+|script                   |spring fixture                     |
+|start application context|batch-hr-calcolo-ore-utilizzate.xml|
+
+L'elenco di dipendenti e':
+
+|Query: elenco permessi         |
+|id_dipendente|data_permesso|ore|
+|1            |             |   |
+|1            |             |   |
+|1            |             |   |
+|1            |             |   |
+|2            |             |   |
+|2            |             |   |
+|3            |             |   |
+
+Eseguo il batch
+
+|script   |spring fixture        |
+|run batch|calcolo-ore-utilizzate|
+|check    |exit code  |COMPLETED |
+
+Il file di output contiene i risultati attesi
+
+|script  |controlla file            |
+|con nome|calcolo-ore-utilizzate.csv|
+|ensure  |il file esiste            |
+|check   |la riga |0|e uguale a|1,22|
+|check   |la riga |1|e uguale a|2,12|
+|check   |la riga |2|e uguale a|3,8 |
+
+|script|spring fixture|
+|close context        |

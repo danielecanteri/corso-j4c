@@ -50,3 +50,4 @@ target/
 **/fitnesse/TemplateLibrary/
 batch-hr/estrazione-dipendenti-con-tipo-contratto.csv
 batch-hr/calcolo-ral.csv
+batch-hr/calcolo-ore-utilizzate.csv
